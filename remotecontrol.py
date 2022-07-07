@@ -6,16 +6,16 @@ import steppercontrol
 
 
 class TestPage(BaseHTTPRequestHandler):
-    def do_POST(self):
-        content_length = int(self.headers['Content-Length'])
-        body = self.rfile.read(content_length)
-        print(body)
-        steppercontrol.stepforward()
     def do_GET(self):
         self.send_response(200)
         self.send_header("Content-type", "text/html")
         self.end_headers()
         self.wfile.write(bytes("<body><p>This is an example web server.</p></body>", "utf-8"))
+    def do_POST(self):
+        content_length = int(self.headers['Content-Length'])
+        body = self.rfile.read(content_length)
+        print(body)
+        steppercontrol.stepforward()
 
 
 server = HTTPServer(("localhost", 8085),TestPage)
