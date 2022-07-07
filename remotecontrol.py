@@ -9,6 +9,12 @@ class TestPage(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(bytes("<body><p>This is an example web server.</p></body>", "utf-8"))
         steppercontrol.stepforward()
+
+    def do_Post(self):
+        self.send_response(200)
+        content_length = int(self.headers['Content-Length'])
+        body = self.rfile.read(content_length)
+
 server = HTTPServer(("localhost", 8085),TestPage)
 
 
