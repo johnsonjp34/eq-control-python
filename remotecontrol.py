@@ -6,14 +6,13 @@ import steppercontrol
 
 
 class TestPage(BaseHTTPRequestHandler):
-
     def do_Post(self):
         content_length = int(self.headers['Content-Length'])
         body = self.rfile.read(content_length)
         print(body)
         steppercontrol.stepforward()
 
-server = HTTPServer(("localhost", 8085),TestPage)
+server = HTTPServer(("localhost", 8085),TestPage.do_Post())
 
 
 try:
