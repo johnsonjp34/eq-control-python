@@ -3,7 +3,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 import time
 import steppercontrol
 
-# curl -X POST http://localhost:8085 -H "Content-Type: application/json" -d '{"direction":"backwards", "distance":5}'
+# curl -X POST http://localhost:8085 -H "Content-Type: application/json" -d '{"direction":"backward", "distance":5}'
 
 
 
@@ -18,9 +18,9 @@ class TestPage(BaseHTTPRequestHandler):
         body = self.rfile.read(content_length)
         result = json.loads(body)
         print(result)
-        if result.direction == "forward":
+        if result['direction'] == "forward":
             print("move forward")
-        if result.direction == "backward":
+        if result['direction'] == "backward":
             print("move backward")
         steppercontrol.stepforward()
         self.send_response(200)
