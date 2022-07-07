@@ -1,3 +1,4 @@
+import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import time
 import steppercontrol
@@ -14,7 +15,8 @@ class TestPage(BaseHTTPRequestHandler):
     def do_POST(self):
         content_length = int(self.headers['Content-Length'])
         body = self.rfile.read(content_length)
-        print(body)
+        result = json.loads(body)
+        print(result)
         steppercontrol.stepforward()
 
 
