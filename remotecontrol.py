@@ -6,7 +6,7 @@ import steppercontrol
 
 
 class TestPage(BaseHTTPRequestHandler):
-    def do_Post(self):
+    def do_POST(self):
         content_length = int(self.headers['Content-Length'])
         body = self.rfile.read(content_length)
         print(body)
