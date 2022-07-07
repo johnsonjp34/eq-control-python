@@ -14,6 +14,7 @@ class TestPage(BaseHTTPRequestHandler):
         steppercontrol.stepforward()
 
     def do_Post(self):
+        self.send_response(200)
         content_length = int(self.headers['Content-Length'])
         body = self.rfile.read(content_length)
         print(body)
