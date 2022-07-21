@@ -10,6 +10,27 @@ import steppercontrol
 listOfCorrection = []
 
 
+def calibration(distance, motor, correctionNumber, direction):
+    listOfCorrection.append(distance)
+
+    if correctionNumber == 1:
+        if direction == "forward":
+            steppercontrol.stepforward(distance, motor)
+        else:
+            steppercontrol.stepbackward(distance, motor)
+
+    if correctionNumber > 1:
+        # correction number begins with 1. this is the error calculated after each set of pictures
+        # correction Factor. This is to see how much the stepper motor is moving the mount
+        # Compare the difference between the last entry and the remaining error and divide by the previous motor steps
+        correctionFactor = (listOfCorrection[correctionNumber - 2] - listOfCorrection[correctionNumber - 1]) / \
+                           listOfCorrection[correctionNumber - 2]
+    if direction == "forward":
+        steppercontrol.stepforward(distance * correctionFactor, motor)
+    else:
+        steppercontrol.stepbackward(distance * correctionFactor, motor)
+
+
 class MotorWebControl(BaseHTTPRequestHandler):
     def do_GET(self):
         self.send_response(200)
@@ -33,24 +54,3 @@ try:
     server.serve_forever()
 except KeyboardInterrupt:
     pass
-
-
-def calibration(distance, motor, correctionNumber, direction):
-    listOfCorrection.append(distance)
-
-    if correctionNumber == 1:
-        if direction == "forward":
-            steppercontrol.stepforward(distance, motor)
-        else:
-            steppercontrol.stepbackward(distance, motor)
-
-    if correctionNumber > 1:
-        # correction number begins with 1. this is the error calculated after each set of pictures
-        # correction Factor. This is to see how much the stepper motor is moving the mount
-        # Compare the difference between the last entry and the remaining error and divide by the previous motor steps
-        correctionFactor = (listOfCorrection[correctionNumber - 2] - listOfCorrection[correctionNumber - 1]) / \
-                           listOfCorrection[correctionNumber - 2]
-    if direction == "forward":
-        steppercontrol.stepforward(distance * correctionFactor, motor)
-    else:
-        steppercontrol.stepbackward(distance * correctionFactor, motor)
