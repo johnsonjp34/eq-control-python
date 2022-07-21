@@ -16,6 +16,7 @@ def calibration(distance, motor, correctionNumber, direction):
     if correctionNumber == 1:
         if direction == "forward":
             steppercontrol.stepforward(distance, motor)
+            print("Stepping Forward " + distance + " " + motor)
         else:
             steppercontrol.stepbackward(distance, motor)
 
