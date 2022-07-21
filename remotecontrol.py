@@ -25,10 +25,10 @@ def calibration(distance, motor, correctionNumber, direction):
         # Compare the difference between the last entry and the remaining error and divide by the previous motor steps
         correctionFactor = (listOfCorrection[correctionNumber - 2] - listOfCorrection[correctionNumber - 1]) / \
                            listOfCorrection[correctionNumber - 2]
-    if direction == "forward":
-        steppercontrol.stepforward(distance * correctionFactor, motor)
-    else:
-        steppercontrol.stepbackward(distance * correctionFactor, motor)
+        if direction == "forward":
+            steppercontrol.stepforward(distance * correctionFactor, motor)
+        else:
+            steppercontrol.stepbackward(distance * correctionFactor, motor)
 
 
 class MotorWebControl(BaseHTTPRequestHandler):
