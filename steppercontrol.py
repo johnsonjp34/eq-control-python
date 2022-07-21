@@ -17,7 +17,7 @@ def stepforward(n,whichMotor):
             kit.stepper1.onestep(direction=stepper.FORWARD, style=stepper.DOUBLE)
         if whichMotor == "alt":
             kit.stepper2.onestep(direction=stepper.FORWARD, style=stepper.DOUBLE)
-        time.sleeo(0.01)
+        time.sleep(0.01)
 
 
 

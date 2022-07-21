@@ -19,6 +19,7 @@ def calibration(distance, motor, correctionNumber, direction):
             print("Stepping Forward " + distance + " " + motor)
         else:
             steppercontrol.stepbackward(distance, motor)
+            print("Stepping Backward " + distance + " " + motor)
 
     if correctionNumber > 1:
         # correction number begins with 1. this is the error calculated after each set of pictures
