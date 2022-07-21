@@ -11,7 +11,8 @@ kit = MotorKit()
 #If single motor used alt axis, you must move the alt all the way down first.
 
 def stepforward(n,whichMotor):
-    for i in range(n):
+    steps = round(n)
+    for i in range(steps):
         if whichMotor == "az":
             kit.stepper1.onestep(direction=stepper.FORWARD, style=stepper.DOUBLE)
         if whichMotor == "alt":
@@ -21,7 +22,8 @@ def stepforward(n,whichMotor):
 
 
 def stepbackward(n,whichMotor):
-    for i in range(n):
+    steps = round(n)
+    for i in range(steps):
         if whichMotor == "az":
             kit.stepper1.onestep(direction=stepper.BACKWARD, style=stepper.DOUBLE)
         if whichMotor == "alt":
