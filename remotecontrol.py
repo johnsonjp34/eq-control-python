@@ -29,10 +29,10 @@ def calibration(distance, motor, correctionNumber, direction):
                            listOfCorrection[correctionNumber - 2]
         if direction == "forward":
             steppercontrol.stepforward(distance * correctionFactor, motor)
-            print("Stepping Forward " + str(distance * correctionFactor) + " " + motor)
+            print("Stepping Forward " + str(round(distance * correctionFactor)) + " " + motor)
         else:
             steppercontrol.stepbackward(distance * correctionFactor, motor)
-            print("Stepping Forward " + str(distance * correctionFactor) + " " + motor)
+            print("Stepping Backward " + str(round(distance * correctionFactor)) + " " + motor)
 
 
 class MotorWebControl(BaseHTTPRequestHandler):
