@@ -24,7 +24,7 @@ class MotorWebControl(BaseHTTPRequestHandler):
         body = self.rfile.read(content_length)
         result = json.loads(body)
         print(result)
-        calibration(result['distance', result['motor'], result['correctionNumber'], result['direction']])
+        calibration(result['distance'], result['motor'], result['correctionNumber'], result['direction'])
 
 
 server = HTTPServer(("localhost", 8085), MotorWebControl)
